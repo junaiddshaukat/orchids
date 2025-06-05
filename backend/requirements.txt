@@ -1,0 +1,9 @@
+fastapi[all]>=0.115.12
+uvicorn>=0.27.1
+beautifulsoup4>=4.12.3
+requests>=2.31.0
+google-generativeai>=0.3.2
+python-dotenv>=1.0.1
+selenium>=4.17.2
+cloudscraper>=1.2.71
+webdriver-manager>=4.0.1 

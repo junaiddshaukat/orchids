@@ -120,3 +120,95 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Code highlighting styles */
+pre {
+  @apply overflow-x-auto text-sm leading-6 p-4;
+}
+
+pre code {
+  @apply font-mono text-sm;
+  background: transparent !important;
+}
+
+.hljs {
+  @apply bg-transparent text-gray-200;
+  color: #e5e7eb !important;
+}
+
+.hljs-tag,
+.hljs-name {
+  @apply text-blue-400;
+  color: #60a5fa !important;
+}
+
+.hljs-attr {
+  @apply text-yellow-400;
+  color: #fbbf24 !important;
+}
+
+.hljs-string {
+  @apply text-green-400;
+  color: #34d399 !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  @apply text-purple-400;
+  color: #c084fc !important;
+}
+
+.hljs-comment {
+  @apply text-gray-500;
+  color: #6b7280 !important;
+}
+
+.hljs-variable,
+.hljs-literal,
+.hljs-number,
+.hljs-template-variable {
+  @apply text-orange-400;
+  color: #fb923c !important;
+}
+
+.hljs-title,
+.hljs-class,
+.hljs-type {
+  @apply text-blue-300;
+  color: #93c5fd !important;
+}
+
+.hljs-params {
+  @apply text-gray-300;
+  color: #d1d5db !important;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  @apply text-teal-400;
+  color: #2dd4bf !important;
+}
+
+.hljs-section,
+.hljs-selector-id,
+.hljs-selector-class {
+  @apply text-pink-400;
+  color: #f472b6 !important;
+}
+
+/* Custom scrollbar for code blocks */
+pre::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+pre::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}

@@ -30,13 +30,8 @@ import {
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import Prism from 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
-import 'prismjs/components/prism-markup'
-import 'prismjs/components/prism-css'
-import 'prismjs/components/prism-javascript'
-import 'prismjs/plugins/line-numbers/prism-line-numbers'
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github-dark.css'
 import JSZip from 'jszip'
 
 export default function Home() {
@@ -60,12 +55,28 @@ export default function Home() {
   })
   const [clonedAssets, setClonedAssets] = useState<string[]>([])
 
+  // Initialize highlight.js
+  useEffect(() => {
+    hljs.configure({
+      languages: ['html', 'css', 'javascript'],
+      ignoreUnescapedHTML: true
+    })
+    // Force initial highlighting
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement)
+    })
+  }, [])
+
   // Highlight code whenever it changes
   useEffect(() => {
     if (typeof window !== 'undefined' && (clonedCode || clonedCSS)) {
-      Prism.highlightAll()
+      setTimeout(() => {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightElement(block as HTMLElement)
+        })
+      }, 0)
     }
-  }, [clonedCode, clonedCSS])
+  }, [clonedCode, clonedCSS, activeTab])
 
   // Simulate progress during cloning
   useEffect(() => {
@@ -661,9 +672,9 @@ ${clonedCode}
                         {/* HTML Code */}
                         <div>
                           <h4 className="text-sm font-medium mb-2">HTML</h4>
-                          <div className="rounded-lg bg-slate-900 dark:bg-slate-950 p-6 overflow-auto">
-                            <pre className="text-sm line-numbers">
-                              <code className="language-markup">{clonedCode}</code>
+                          <div className="rounded-lg bg-slate-900 dark:bg-slate-950 p-4">
+                            <pre className="!m-0 !bg-transparent">
+                              <code className="language-html hljs">{clonedCode}</code>
                             </pre>
                           </div>
                         </div>
@@ -671,9 +682,9 @@ ${clonedCode}
                         {/* CSS Code */}
                         <div>
                           <h4 className="text-sm font-medium mb-2">CSS</h4>
-                          <div className="rounded-lg bg-slate-900 dark:bg-slate-950 p-6 overflow-auto">
-                            <pre className="text-sm line-numbers">
-                              <code className="language-css">{clonedCSS}</code>
+                          <div className="rounded-lg bg-slate-900 dark:bg-slate-950 p-4">
+                            <pre className="!m-0 !bg-transparent">
+                              <code className="language-css hljs">{clonedCSS}</code>
                             </pre>
                           </div>
                         </div>
